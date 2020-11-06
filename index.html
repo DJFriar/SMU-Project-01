@@ -5,10 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TripCase</title>
     <script src="https://kit.fontawesome.com/ade5c7beee.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+    <header>
+        <h1 id="title">TripCase</h1>
+        <h5 id="subTitle">Know before you go</h5>
+        <div class="uk-width-1-1" id="searchRow">
+            <div class="uk-align-center" id="searchEntry">
+                <input type="text" id="searchField" name="searchField" placeholder="Search for a City">
+                <button type="button" class="uk-button uk-button-default uk-button-small" id="searchBtn"><span class="fas fa-search"></span></button><br>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div id="contentArea" uk-grid>
+        <div class="uk-width-1-4 uk-grid-small" id="leftSidebar">
+                <div id="cityList">
+                    City Listing goes here
+                </div>
+        </div>
+        <div class="uk-width-expand uk-grid-small" id="mainContent">
+            Main Content Area
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2020 TripCast. All rights reserved.</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
