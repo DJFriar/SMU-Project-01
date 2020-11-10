@@ -1,15 +1,25 @@
-var state = 'TX'; // testing
-
+// var state = 'TX'; // testing
+var city = 'Little Elm';
 
 // County Call local json file
 
 $.getJSON("https://raw.githubusercontent.com/DJFriar/SMU-Project-01/Jose/assets/json/uscities.json", function (data) {
 
     // Sample data for field mapping
-    console.log('county name: '+ data[0].county_name);
-    console.log('city name: ' + data[0].city);
-    console.log('state: ' + data[0].state_id);
-    console.log('state name: ' + data[0].state_name)
+    //  console.log('county name: '+ data[0].county_name);
+    //  console.log('city name: ' + data[0].city);
+    //  console.log('state: ' + data[0].state_id);
+    //  console.log('state name: ' + data[0].state_name)
+
+    for(var i  in data) {
+        if(data[i].city === city) {
+            console.log('county name: '+ data[i].county_name);
+            console.log('city name: ' + data[i].city);
+            console.log('state: ' + data[i].state_id);
+            console.log('state name: ' + data[i].state_name)
+        }
+    }
+    
 })
 
 
