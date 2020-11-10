@@ -16,7 +16,9 @@ var queryURL = "https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries?$
         console.log(response);
         console.log(queryURL);
 
-          console.log(response.declarationTitle);
+          // Sample data for field mapping
+          console.log(response.metadata.filter);
+          console.log(response.DisasterDeclarationsSummaries[0].declarationTitle)
     });
 
 
