@@ -18,7 +18,14 @@ var queryURL = "https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries?$
 
           // Sample data for field mapping
           console.log(response.metadata.filter);
+          console.log(response.DisasterDeclarationsSummaries[0].declarationDate)
+          console.log(response.DisasterDeclarationsSummaries[0].incidentBeginDate)
+          console.log(response.DisasterDeclarationsSummaries[0].incidentEndDate)
+          console.log(response.DisasterDeclarationsSummaries[0].incidentType)
           console.log(response.DisasterDeclarationsSummaries[0].declarationTitle)
+          console.log(response.DisasterDeclarationsSummaries[0].fipsStateCode)
+          console.log(response.DisasterDeclarationsSummaries[0].fipsCountyCode)
+          console.log(response.DisasterDeclarationsSummaries[0].designatedArea)
     });
 
 
