@@ -1,5 +1,5 @@
-var state = '';
-var city = 'Little Elm';
+var state = 'TX';
+var city = 'Frisco';
 var county = '';
 
 // County Call local json file
@@ -43,6 +43,11 @@ $.getJSON("https://raw.githubusercontent.com/DJFriar/SMU-Project-01/Jose/assets/
 
                 console.log(response.DisasterDeclarationsSummaries[b].state)
                 console.log(response.DisasterDeclarationsSummaries[b].designatedArea)
+                console.log(response.DisasterDeclarationsSummaries[b].incidentType)
+                console.log(response.DisasterDeclarationsSummaries[b].declarationTitle)
+                console.log(response.DisasterDeclarationsSummaries[b].declarationDate)
+                console.log(response.DisasterDeclarationsSummaries[b].incidentBeginDate)
+                console.log(response.DisasterDeclarationsSummaries[b].fyDeclared)
 
 
             }
