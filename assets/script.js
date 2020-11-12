@@ -1,6 +1,12 @@
 var state = 'TX';
-var city = 'Frisco';
+var city = '';
 var county = '';
+
+$('#searchBtn').click(function (event) {
+
+    event.preventDefault();
+    var city = $('#searchField').val().trim();
+
 
 // County Call local json file
 
@@ -67,3 +73,17 @@ $.getJSON("https://raw.githubusercontent.com/DJFriar/SMU-Project-01/Jose/assets/
     });
 
 });
+
+
+
+
+
+
+
+
+
+
+})
+
+
+
