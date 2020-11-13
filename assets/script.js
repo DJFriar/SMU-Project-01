@@ -1,93 +1,54 @@
-var state = 'TX';
-var city = '';
-var county = '';
+var cityLat = '32.77';
+var cityLong = '-96.78';
 
-$('#searchBtn').click(function (event) {
+  // Calling census api , with lay long get county
+    var queryCityInfo =  "https://geo.fcc.gov/api/census/area?lat=" + cityLat + "&lon=" + cityLong + "&format=json";
 
-    event.preventDefault();
-    var city = $('#searchField').val().trim();
+    $.ajax({
+        url: queryCityInfo,
+        method: 'GET'
+    }).then(function (queryCityInfo) {
+        console.log(queryCityInfo.results[0].county_name);
+        console.log(queryCityInfo.results[0].state_code);
+        console.log(queryCityInfo.results[0].state_name);
 
-
-    // County Call local json file
-
-    $.getJSON("https://raw.githubusercontent.com/DJFriar/SMU-Project-01/Jose/assets/json/uscities.json", function (data) {
-
-        // **** DON'T DELETE - Sample data for field mapping  
-        //      console.log('county name: '+ data[0].county_name);
-        //      console.log('city name: ' + data[0].city);
-        //      console.log('state: ' + data[0].state_id);
-        //      console.log('state name: ' + data[0].state_name)
-
-        for (var i in data) {
-            if (data[i].city === city && data[i].state_id === state) {
-                // console.log('county name: ' + data[i].county_name);
-                // console.log('city name: ' + data[i].city);
-                console.log('state: ' + data[i].state_id);
-                console.log('state name: ' + data[i].state_name)
-                state = data[i].state_id;
-                county = data[i].county_name;
-            }
-        }
+        var state = queryCityInfo.results[0].state_code;
+        var county = queryCityInfo.results[0].county_name;
 
         // Call to FEMA API
-        var queryURL = "https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries?$filter=state%20eq%20%27" + state + "%27";
+        var queryFemaInfo = "https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries?$filter=state%20eq%20%27" + state + "%27";
 
         $.ajax({
-            url: queryURL,
+            url: queryFemaInfo,
             method: 'GET'
-        }).then(function (response) {
-            console.log(response);
-            console.log(queryURL);
-            console.log('state_id:' + state);
-            console.log('county:' + county);
+        }).then(function (femaInfo) {
+            console.log('fema: ' + queryFemaInfo);
+
+            for (var b in femaInfo.DisasterDeclarationsSummaries) {
 
 
-            for (var b in response.DisasterDeclarationsSummaries) {
+                if (femaInfo.DisasterDeclarationsSummaries[b].state === state && femaInfo.DisasterDeclarationsSummaries[b].designatedArea.match(county)
+                && femaInfo.DisasterDeclarationsSummaries[b].fyDeclared === 1990) {
 
+                  console.log(femaInfo.DisasterDeclarationsSummaries[b].state)
+                    console.log('Designated Area:' + femaInfo.DisasterDeclarationsSummaries[b].designatedArea)
+                    console.log('Incident Type:' + femaInfo.DisasterDeclarationsSummaries[b].incidentType)
+                    console.log(femaInfo.DisasterDeclarationsSummaries[b].declarationTitle)
+                    console.log(femaInfo.DisasterDeclarationsSummaries[b].declarationDate)
+                    console.log(femaInfo.DisasterDeclarationsSummaries[b].incidentBeginDate)
+                    console.log('Year: ' + femaInfo.DisasterDeclarationsSummaries[b].fyDeclared)
 
-                if (response.DisasterDeclarationsSummaries[b].state === state && response.DisasterDeclarationsSummaries[b].designatedArea.match(county)
-                && response.DisasterDeclarationsSummaries[b].fyDeclared === 1990) {
-
-                    console.log(response.DisasterDeclarationsSummaries[b].state)
-                    console.log(response.DisasterDeclarationsSummaries[b].designatedArea)
-                    console.log(response.DisasterDeclarationsSummaries[b].incidentType)
-                    console.log(response.DisasterDeclarationsSummaries[b].declarationTitle)
-                    console.log(response.DisasterDeclarationsSummaries[b].declarationDate)
-                    console.log(response.DisasterDeclarationsSummaries[b].incidentBeginDate)
-                    console.log(response.DisasterDeclarationsSummaries[b].fyDeclared)
-
-                    $('.1').append('Year: ' + response.DisasterDeclarationsSummaries[b].fyDeclared);
-                    $('.2').append('Incident Type: ' + response.DisasterDeclarationsSummaries[b].incidentType);
-                    $('.3').append('Designated Area: ' + response.DisasterDeclarationsSummaries[b].designatedArea);
+                    $('.1').append('Year: ' + femaInfo.DisasterDeclarationsSummaries[b].fyDeclared);
+                    $('.2').append('Incident Type: ' + femaInfo.DisasterDeclarationsSummaries[b].incidentType);
+                    $('.3').append('Designated Area: ' + femaInfo.DisasterDeclarationsSummaries[b].designatedArea);
 
             }
 
         }
-        // Sample data for field mapping
-        //   console.log(response.metadata.filter);
-        //   console.log(response.DisasterDeclarationsSummaries[0].declarationDate)
-        //   console.log(response.DisasterDeclarationsSummaries[0].incidentBeginDate)
-        //  console.log(response.DisasterDeclarationsSummaries[0].incidentEndDate)
-        // console.log(response.DisasterDeclarationsSummaries[0].incidentType)
-        //  console.log(response.DisasterDeclarationsSummaries[0].declarationTitle)
-        //  console.log(response.DisasterDeclarationsSummaries[0].fipsStateCode)
-        //  console.log(response.DisasterDeclarationsSummaries[0].fipsCountyCode)
-        //  console.log(response.DisasterDeclarationsSummaries[0].designatedArea)
 
-    });
+    }); 
 
 });
-
-
-
-
-
-
-
-
-
-
-})
 
 
 
