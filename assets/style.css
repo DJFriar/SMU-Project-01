@@ -39,6 +39,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     padding-top: 10px;
+    font-size: 18px;
 }
 
 #mainContent {
@@ -65,6 +66,10 @@ h1 {
     margin-bottom: 4px;
 }
 
+h4 {
+    color: white;
+}
+
 h5 {
     margin: 0px;
 }
@@ -78,6 +83,12 @@ h5 {
     padding-bottom: 20px;
 }
 
-.uk-card {
-    background-color: violet;
+#cityTitle {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.uk-card-body {
+    font-size: 16px;
+    font-weight: 300;
 }
