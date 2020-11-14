@@ -9,14 +9,18 @@ $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     // capture the user's input
     var rawInputtedCity = $("#searchField").val();
+    
     // make everything title case and pretty
     inputtedCity = rawInputtedCity.toLowerCase().replace(/\b[a-z]/g, function (txtVal) {
         return txtVal.toUpperCase();
     });
+
+    
     // add city to the search history
     logCityToHistoryArea();
     // fetch the weather data
     buildCity();
+    cityWeather(inputtedCity);
 });
 
 function logCityToHistoryArea() {
@@ -26,6 +30,7 @@ function logCityToHistoryArea() {
 };
 
 function buildCity() {
+
     // create the section for each city
     var cityDiv = $("<div>").attr("class", "uk-child-width-expand@s uk-text-center");
     var dataGrid = $("<div uk-grid>").attr("class", "uk-child-width-expand@s uk-text-center");
@@ -34,10 +39,12 @@ function buildCity() {
     // add the new city section to the main content area
     $("#mainContent").append(cityDiv);
     // add the first data card to the city row
+    
     buildWeatherCard(dataGrid);
 };
 
 function buildWeatherCard(dataGrid) {
+
 
     // create an empty div and add it to the city row
     var emptyDiv = $("<div>").attr("class", "dataCard");
@@ -106,6 +113,22 @@ function buildAQICard(dataGrid) {
     dataGrid.append(emptyDiv);
 };
 
+
+function cityWeather(inputtedCity) {
+    // Weather API
+
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + inputtedCity + '&appid=31b96be380f83051c516bfaaa3994128'
+
+    $.ajax({
+        url: url,
+        method: 'GET'
+    }).then(function (response) {
+        lat = response.coord.lat;
+        long = response.coord.lon;
+    });
+    return lat;
+    return long;
+}
 
 
 
