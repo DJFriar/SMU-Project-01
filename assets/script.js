@@ -40,7 +40,7 @@ function buildCity() {
     $("#mainContent").append(cityDiv);
     // add the first data card to the city row
     
-    buildWeatherCard(dataGrid);
+ buildWeatherCard(dataGrid);
 };
 
 function buildWeatherCard(dataGrid) {
@@ -53,10 +53,10 @@ function buildWeatherCard(dataGrid) {
     // set the card title
     var cardTitle = $("<h3>").attr("class", "uk-card-title");
     // add the new data card to the city row
-    cardTitle.text("Weather");
-    cardDiv.append(cardTitle);
-    emptyDiv.append(cardDiv);
-    dataGrid.append(emptyDiv);
+  //  cardTitle.text("Weather");
+ //   cardDiv.append(cardTitle);
+ //   emptyDiv.append(cardDiv);
+ //   dataGrid.append(emptyDiv);
     // call next function
     buildFEMACard(dataGrid);
 };
